@@ -1,0 +1,17 @@
+{
+    "name": "roucky/src",
+    "require": {
+        "guzzlehttp/guzzle": "^7.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Roucky\\Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "roucky",
+            "email": "34217367+roucky44@users.noreply.github.com"
+        }
+    ]
+}
