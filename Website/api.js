@@ -24,23 +24,23 @@ async function initCollection() {
     }
 }
 
-async function fetchLOTRData() {
-    const response = await fetch('https://the-one-api.dev/v2/character', {
+async function fetchLOTRData() { // fonction pour récupérer les données de l'API
+    const response = await fetch('https://the-one-api.dev/v2/character', { // je me connecte à l'API
         headers: {
-            'Authorization': 'Bearer KtFGls3XWxo_air2CXKc'
+            'Authorization': 'Bearer KtFGls3XWxo_air2CXKc' // je me connecte à l'API avec la clé
         }
     });
     
-    if (!response.ok) {
-        throw new Error(`Erreur ${response.status}: ${response.statusText}`);
+    if (!response.ok) { 
+        throw new Error(`Erreur ${response.status}: ${response.statusText}`); // je vérifie que je recois une réponse
     }
     
-    return await response.json();
+    return await response.json(); // je converti la réponse en JSON
 }
 
-function renderCharacters(characters, container) {
-    if (!characters || characters.length === 0) {
-        container.innerHTML = '<p>Aucun personnage trouvé dans la collection.</p>';
+function renderCharacters(characters, container) { // fonction pour afficher les personnages
+    if (!characters || characters.length === 0) { 
+        container.innerHTML = '<p>Aucun personnage trouvé dans la collection.</p>'; // si pas de personnage trouvé
         return;
     }
 
@@ -98,10 +98,10 @@ function sanitizeHTML(text) { // fonction pour éviter les injections.
 //      /!\ Elle ne fournis que des endpoints en GET uniquement. Ci dessous est la méthode que j'utilise en cas de POST autorisé./!\
 
 
-document.getElementById('character-form').addEventListener('submit', async (e) => {
+document.getElementById('character-form').addEventListener('submit', async (e) => { 
     e.preventDefault();
     
-    const formData = {
+    const formData = { 
         name: document.getElementById('name').value,
         race: document.getElementById('race').value,
         gender: document.getElementById('gender').value,
@@ -110,17 +110,17 @@ document.getElementById('character-form').addEventListener('submit', async (e) =
     };
     
     try {
-        const response = await postCharacter(formData);
+        const response = await postCharacter(formData); 
         showMessage('Personnage ajouté avec succès!', 'success');
         
-    } catch (error) {
-        showMessage(`Erreur: ${error.message}`, 'error');
+    } catch (error) { 
+        showMessage(`Erreur: ${error.message}`, 'error'); 
     }
 });
 
 
 // FONCTION ASYNCHRONE POUR POST UN NOUVEAU PERSONNAGE
-async function postCharacter(characterData) {
+async function postCharacter(characterData) { // fonction pour poster un personnage
     const ApiUrl = 'https://the-one-api.dev/v2/character'; // je me connecte à l'API
     
     const response = await fetch(ApiUrl, { // je fais une requête POST
