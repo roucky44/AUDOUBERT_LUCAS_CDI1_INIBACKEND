@@ -1,26 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rest | API</title>
-</head>
-<body>
-    <header>
-      <div>
-        <h1>Tableau API | Initiation Back-end</h1>
-      </div>
-    </header>
-
-    <main>
-      
-    </main>
-
-    <footer>
-    </footer>
-    
-</body>
-</html>
 
 <?php
 
@@ -37,50 +14,74 @@ try {
     $response = $client->get('https://the-one-api.dev/v2/character');
     $data = json_decode($response->getBody(), true);
     
-    // echo '<pre>';
-    // print_r($data);
-    // echo '</pre>';
-
-    if (isset($data['docs']) && !empty($data['docs'])) {
-      echo '<table>';
-      echo '<thead><tr>';
-      echo '<th>ID</th>';
-      echo '<th>Nom</th>';
-      echo '<th>Race</th>';
-      echo '<th>Genre</th>';
-      echo '<th>Royaume</th>';
-      echo '</tr></thead>';
-      echo '<tbody>';
-      
-      foreach ($data['docs'] as $character) {
-          echo '<tr>';
-          echo '<td>' . htmlspecialchars($character['_id'] ?? '') . '</td>';
-          echo '<td>' . htmlspecialchars($character['name'] ?? '') . '</td>';
-          echo '<td>' . htmlspecialchars($character['race'] ?? '') . '</td>';
-          echo '<td>' . htmlspecialchars($character['gender'] ?? '') . '</td>';
-          echo '</tr>';
-      }
-      
-      echo '</tbody>';
-      echo '</table>';
-  } else {
-      echo '<p>Aucune donnée disponible</p>';
-  }
+    //echo '<pre>';
+    //print_r($data);
+    //echo '</pre>';
     
 } catch (Exception $e) {
     echo 'Erreur API: ' . $e->getMessage();
 }
 
-try {
-  $response = $client->get('https://the-one-api.dev/v2/movie');
-  $data = json_decode($response->getBody(), true);
-  
-  echo '<pre>';
-  print_r($data);
-  echo '</pre>';
-  
-} catch (Exception $e) {
-  echo 'Erreur API: ' . $e->getMessage();
-}
-
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Fetch | API</title>
+</head>
+<body>
+    <header>
+        <h1>Interface API | Initiation Back-End</h1>
+    </header>
+
+    <main>
+    <?php 
+        if (isset($data['docs']) && count($data['docs']) > 0): ?>
+            <table>
+                <thead>
+                    <tr> <!-- Categories du tableau (entête) -->
+                        <th>Name</th> 
+                        <th>Race</th>
+                        <th>Gender</th>
+                        <th>Birth</th>
+                        <th>Death</th>
+                        <th>Realm</th>
+                        <th>Spouse</th>
+                        <th>Wiki_URL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($data['docs'] as $character): ?> <!-- pour tout - mes datas existant dans la doc - qui sont quoi? des character. -->
+                        <tr>
+                            <td><?= htmlspecialchars($character['name'] ?? 'N/A') ?></td> <!-- tu me display les données de cat name DANS le th Name -->
+                            <td><?= htmlspecialchars($character['race'] ?? 'N/A') ?></td>
+                            <td><?= htmlspecialchars($character['gender'] ?? 'N/A') ?></td>
+                            <td><?= htmlspecialchars($character['birth'] ?? 'N/A') ?></td>
+                            <td><?= htmlspecialchars($character['death'] ?? 'N/A') ?></td>
+                            <td><?= htmlspecialchars($character['realm'] ?? 'N/A') ?></td>
+                            <td><?= htmlspecialchars($character['spouse'] ?? 'N/A') ?></td>
+                            <td>
+                                <?php if (isset($character['wikiUrl'])): ?>
+                                    <a href="<?= htmlspecialchars($character['wikiUrl']) ?>" target="_blank">Link</a>
+                                <?php else: ?>
+                                    N/A
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        <?php else: ?>
+            <p>No character data found.</p>
+        <?php endif; ?>
+    </main>
+
+    <footer>
+        <h3>Vous avez atteint les abysses..</h3>
+    </footer>
+    
+</body>
+</html>
