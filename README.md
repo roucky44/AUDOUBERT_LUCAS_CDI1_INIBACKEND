@@ -1,6 +1,15 @@
 # AUDOUBERT_LUCAS_CDI1_INIBACKEND
 
-# Exercice – Identifier les rôles dans une application web
+
+
+## Sommaire
+
+- [Execerice - Identifier les rôles dans une application web](#Exercice)
+- [API](/api)
+- [Calculer la moyenne et Application avec Guzzle](/index)
+
+
+# Exercice – Identifier les rôles dans une application web <a name="Exercice"></a>
 
 ### 1. **NETFLIX**  
 *J'ai choisis Netflix comme application car c'est une application qui a revolutionné son domaine grâce a ses "microservices".*  
