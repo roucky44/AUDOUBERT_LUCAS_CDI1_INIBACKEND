@@ -17,6 +17,9 @@ function square($number1, $number2) {
     return ($num * $num);
 }
 
+
+// Fonction qui calcule la moyenne (en l'occurrence de 3 notes) et qui affiche le résultat
+
 function calculerMoyenne($nombre1, $nombre2, $nombre3) { //Fonction USER avec 3 parametres (Nombre qui equivalent une note.)
     return ($nombre1 + $nombre2 + $nombre3) / 3; // on return la fonction (<3 de la fonction) addition des 3 nombres divisé par 3 pour return la moyenne
 }
@@ -50,10 +53,10 @@ $statusCode = $respone->getStatusCode();
 
 $body = $respone->getBody();
 
-$data = json_decode($body, true); // convert en json
+$data = json_decode($body, true); // converti en json
 
 
-echo '<pre>'; // format plus lisible
+echo '<pre>'; // format plus lisible qui format le brut envoyé par le serveur.
 var_dump($data);
 echo '</pre>';
 ?>

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', initCollection);
+document.addEventListener('DOMContentLoaded', initCollection); 
 
 async function initCollection() {
     const container = document.getElementById('api-renderer');
@@ -40,7 +40,7 @@ async function fetchLOTRData() {
 
 function renderCharacters(characters, container) {
     if (!characters || characters.length === 0) {
-        container.innerHTML = '<p>Aucun personnage trouvé dans votre collection.</p>';
+        container.innerHTML = '<p>Aucun personnage trouvé dans la collection.</p>';
         return;
     }
 
@@ -83,7 +83,7 @@ function renderCharacters(characters, container) {
     container.innerHTML = html;
 }
 
-function sanitizeHTML(text) {
+function sanitizeHTML(text) { // fonction pour éviter les injections.
     if (!text) return 'N/A';
     return text.toString()
         .replace(/&/g, '&amp;')
@@ -118,27 +118,28 @@ document.getElementById('character-form').addEventListener('submit', async (e) =
     }
 });
 
+
+// FONCTION ASYNCHRONE POUR POST UN NOUVEAU PERSONNAGE
 async function postCharacter(characterData) {
-    // Remplacez cette URL par votre véritable endpoint POST
-    const ApiUrl = 'https://the-one-api.dev/v2/character'; // API factice pour l'exemple
+    const ApiUrl = 'https://the-one-api.dev/v2/character'; // je me connecte à l'API
     
-    const response = await fetch(ApiUrl, {
+    const response = await fetch(ApiUrl, { // je fais une requête POST
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer KtFGls3XWxo_air2CXKc'
         },
-        body: JSON.stringify(characterData)
+        body: JSON.stringify(characterData) // je converti les données en JSON
     });
     
-    if (!response.ok) {
-        throw new Error(`Erreur HTTP: ${response.status}`);
+    if (!response.ok) { // je vérifie que je recois une réponse
+        throw new Error(`Erreur HTTP: ${response.status}`); // erreur si la réponse n'est pas ok
     }
     
     return await response.json();
 }
 
-function showMessage(text, type) {
+function showMessage(text, type) { // fonction pour afficher le message ok ou pas ok
     const messageDiv = document.getElementById('form-message');
     messageDiv.textContent = text;
     messageDiv.style.background = type === 'success' ? '#d4edda' : '#f8d7da';
